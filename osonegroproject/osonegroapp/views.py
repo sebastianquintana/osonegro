@@ -11,3 +11,14 @@ def index (request):
 def getproducts(request):
     products_list=Product.objects.all()
     return render(request, 'osonegroapp/products.htm', {'products_list': products_list})
+
+def productdetails(request, id):
+    prod=get_object_or_404(Product, pk=id)
+    discount=prod.memberdiscount
+    reviews=Review.object.filter(product=id).count()
+    context={
+        'prod': prod,
+        'discount' : discount,
+        'reviews': reviews,
+    }
+    return render(request,'osonegroapp/productdetails.htm', context=context)
