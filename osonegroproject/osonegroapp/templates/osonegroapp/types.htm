@@ -1,6 +1,6 @@
 {% extends 'base.htm' %}
 {% block content %}
-<h1>Product Types</h1>
+<h1>Record Types</h1>
 <table class='table'>
  <tr>
      <th>Name</th>
@@ -8,8 +8,8 @@
  </tr>
  {% for t in type_list %}
    <tr>
-       <td>{{ t.typename }}</td>
-       <td>{{ t.typedescription }}</td>
+       <td>{{ t.recordname }}</td>
+       <td>{{ t.recorddescription }}</td>
    </tr>
 
  {% endfor %}

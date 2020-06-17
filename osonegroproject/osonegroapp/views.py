@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import ProductType, Product
+from .models import RecordType, Product
 
 def gettypes(request):
-    type_list=ProductType.objects.all()
+    type_list=RecordType.objects.all()
     return render(request, 'osonegroapp/types.htm' ,{'type_list' : type_list})
 # Create your views here.
 def index (request):
