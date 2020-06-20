@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import RecordType, Product
+from .forms import ProductForm
+from django.contrib.auth.decorators import login_required
 
 def gettypes(request):
     type_list=RecordType.objects.all()
@@ -22,3 +24,35 @@ def productdetails(request, id):
         'reviews': reviews,
     }
     return render(request,'osonegroapp/productdetails.htm', context=context)
+
+def newRecord(request):
+     form=ProductForm
+     if request.method=='POST':
+          form=ProductForm(request.POST)
+          if form.is_valid():
+               post=form.save(commit=True)
+               post.save()
+               form=ProductForm()
+     else:
+          form=ProductForm()
+     return render(request, 'osonegroapp/newrecord.htm', {'form': form})
+
+def loginmessage(request):
+    return render(request, 'osonegropp/loginmessage.htm')
+
+def logoutmessage(request):
+    return render(request, 'osonegroapp/logoutmessage.htm')
+
+
+@login_required
+def newProduct(request):
+     form=ProductForm
+     if request.method=='POST':
+          form=ProductForm(request.POST)
+          if form.is_valid():
+               post=form.save(commit=True)
+               post.save()
+               form=ProductForm()
+     else:
+          form=ProductForm()
+     return render(request, 'osonegroapp/newrecord.htm', {'form': form})
